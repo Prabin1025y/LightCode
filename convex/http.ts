@@ -7,6 +7,7 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 const http = httpRouter();
 
 http.route({
+    
     path: "/clerk-webhook", //should be same as endpoint defined in clerk dashboard/webhooks
     method: "POST",
     handler: httpAction(async (ctx, request) => {
