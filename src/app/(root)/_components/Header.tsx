@@ -3,10 +3,11 @@ import { ConvexHttpClient } from 'convex/browser';
 import React from 'react'
 import { api } from '../../../../convex/_generated/api';
 import Link from 'next/link';
-import { CodeXml, Sparkles } from 'lucide-react';
+import { CodeXml, Play, Sparkles } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import UserProfile from './UserProfile';
+import { SignedIn } from '@clerk/nextjs';
 
 const Header = async () => {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -24,8 +25,10 @@ const Header = async () => {
             <div className='flex items-center gap-3'>
                 <ThemeSelector />
                 <LanguageSelector />
-                <Link href="/pricing" className='border flex gap-1 items-center border-amber-500 text-amber-500 px-3 rounded-md bg-[#db654752] hover:bg-[#974631] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>
-                <button>RunCode</button>
+                <Link href="/pricing" className='border flex gap-1 items-center border-green-500 text-green-500 px-3 rounded-md bg-[#47db6031] hover:bg-[#319731b9] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>
+                <SignedIn>
+                    <button className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Play size={16} />RunCode</button>
+                </SignedIn>
                 <UserProfile />
             </div>
         </div >
