@@ -24,8 +24,8 @@ const Header = async () => {
             </div>
             <div className='flex items-center gap-3'>
                 <ThemeSelector />
-                <LanguageSelector />
-                <Link href="/pricing" className='border flex gap-1 items-center border-green-500 text-green-500 px-3 rounded-md bg-[#47db6031] hover:bg-[#319731b9] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>
+                <LanguageSelector hasAccess={convexUser?.isPro || false} />
+                {!convexUser?.isPro && <Link href="/pricing" className='border flex gap-1 items-center border-green-500 text-green-500 px-3 rounded-md bg-[#47db6031] hover:bg-[#319731b9] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>}
                 <SignedIn>
                     <button className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Play size={16} />RunCode</button>
                 </SignedIn>
