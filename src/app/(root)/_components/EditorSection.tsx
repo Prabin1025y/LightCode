@@ -4,6 +4,8 @@ import { RotateCcw, Share, Type, TypeOutline } from 'lucide-react';
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { Editor } from '@monaco-editor/react';
+import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants';
 
 const EditorSection = () => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
@@ -11,6 +13,7 @@ const EditorSection = () => {
   const { editor, fontSize, language, setFontSize, theme, setEditor } = useCodeEditorStore();
 
   const handleRefresh = () => { }
+  const handleEditorChange = () => { }
   const handleFontSizeChange = () => { }
 
   return (
@@ -39,8 +42,37 @@ const EditorSection = () => {
         </div>
       </div>
 
-      <div className='flex-1 border mt-5 rounded-lg border-amber-900 bg-[#2c140e]'>
-        editor
+      <div className='flex-1 border mt-5 rounded-lg border-amber-900 bg-[#2c140e] overflow-hidden'>
+        <Editor
+          height={"680px"}
+          language={LANGUAGE_CONFIG[language].monacoLanguage}
+          onChange={handleEditorChange}
+          theme={theme}
+          beforeMount={defineMonacoThemes}
+          onMount={(editor) => setEditor(editor)}
+
+          options={{
+            minimap:{enabled: false},
+            fontSize,
+            automaticLayout: true,
+            // scrollBeyondLastLine: false,
+            padding: {top: 30, bottom: 16},
+            renderWhitespace: "selection",
+            fontFamily: '"Fire Code","Cascadia Code", Consolas, monospace',
+            fontLigatures: true,
+            cursorBlinking: "smooth",
+            smoothScrolling: true,
+            contextmenu: true,
+            renderLineHighlight: "all",
+            lineHeight: 1.6,
+            letterSpacing: 0.5,
+            roundedSelection: true,
+            scrollbar: {
+              verticalScrollbarSize: 8,
+              horizontalScrollbarSize: 8
+            }
+          }}
+        />
       </div>
 
     </div>
