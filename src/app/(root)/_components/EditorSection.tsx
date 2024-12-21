@@ -6,15 +6,23 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { Editor } from '@monaco-editor/react';
 import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants';
+import UseMounted from '@/app/hooks/useMounted';
 
 const EditorSection = () => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
 
   const { editor, fontSize, language, setFontSize, theme, setEditor } = useCodeEditorStore();
+  const isMounted = UseMounted();
 
   const handleRefresh = () => { }
-  const handleEditorChange = () => { }
-  const handleFontSizeChange = () => { }
+  const handleEditorChange = (value: string | undefined) => {
+    if (value) localStorage.setItem(`editor-code-${language}`, value);
+  }
+  const handleFontSizeChange = (value: number) => {
+    const font_size = Math.max(12, Math.min(value, 24));
+    setFontSize(font_size);
+  }
+
 
   return (
     <div className='flex-1 flex flex-col bg-[#442617] rounded-xl p-5 font-[Roboto]'>
@@ -34,8 +42,8 @@ const EditorSection = () => {
         <div className='flex gap-3'>
           <div className='flex gap-2 border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 px-3 py-1 rounded-lg items-center text-amber-300'>
             <TypeOutline size={16} />
-            <input onChange={handleFontSizeChange} className='h-1' type="range" min={12} max={24} />
-            <p className='text-sm'>{fontSize}</p>
+            <input onChange={(e) => handleFontSizeChange(parseInt(e.target.value))} value={fontSize} className='h-1' type="range" min={12} max={24} />
+            {isMounted && <p className='text-sm'>{fontSize}</p>}
           </div>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleRefresh} className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 p-2 rounded-md h-[34px] aspect-square grid place-items-center text-amber-300'><RotateCcw size={15} /></motion.button>
           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSharePopupOpen(true)} className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Share size={16} />Share</motion.button>
@@ -52,11 +60,11 @@ const EditorSection = () => {
           onMount={(editor) => setEditor(editor)}
 
           options={{
-            minimap:{enabled: false},
+            minimap: { enabled: false },
             fontSize,
             automaticLayout: true,
             // scrollBeyondLastLine: false,
-            padding: {top: 30, bottom: 16},
+            padding: { top: 30, bottom: 16 },
             renderWhitespace: "selection",
             fontFamily: '"Fire Code","Cascadia Code", Consolas, monospace',
             fontLigatures: true,
