@@ -3,11 +3,12 @@ import { ConvexHttpClient } from 'convex/browser';
 import React from 'react'
 import { api } from '../../../../convex/_generated/api';
 import Link from 'next/link';
-import { CodeXml, Play, Sparkles } from 'lucide-react';
+import { CodeXml, Sparkles } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import UserProfile from './UserProfile';
 import { SignedIn } from '@clerk/nextjs';
+import RunButton from './RunButton';
 
 const Header = async () => {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -27,7 +28,7 @@ const Header = async () => {
                 <LanguageSelector hasAccess={convexUser?.isPro || false} />
                 {!convexUser?.isPro && <Link href="/pricing" className='border flex gap-1 items-center border-green-500 text-green-500 px-3 rounded-md bg-[#47db6031] hover:bg-[#319731b9] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>}
                 <SignedIn>
-                    <button className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Play size={16} />RunCode</button>
+                    <RunButton />
                 </SignedIn>
                 <UserProfile />
             </div>

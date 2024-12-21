@@ -1,5 +1,5 @@
 'use client';
-import { CheckSquare2Icon, Clock, CopyCheck, CopyIcon, SquareTerminal } from 'lucide-react'
+import { CheckCircleIcon, CheckSquare2Icon, Clock, CopyCheck, CopyIcon, SquareTerminal, TriangleAlertIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useCodeEditorStore } from '@/Store/UseCodeEditorStore'
@@ -23,10 +23,16 @@ const OutputSection = () => {
   return (
     <div className='flex-1 flex flex-col bg-[#442617] rounded-xl p-5 font-[Roboto]'>
       <div className='flex justify-between'>
-        <p className='text-sm text-amber-300 flex items-center gap-2'><SquareTerminal size={20} />Output</p>
+        <div className='flex gap-4'>
+          <p className='text-sm text-amber-300 flex items-center gap-2'><SquareTerminal size={20} />Output</p>
+          {hasContent && <div className={`flex gap-1 text-sm font-[Roboto] items-center ${error ? "bg-red-500/20 text-red-500":"bg-green-500/20 text-green-500"} rounded-md px-3`}>
+            {error ? <TriangleAlertIcon size={20} />:<CheckCircleIcon size={20} />}
+            {error?<p>Program crashed with some errors</p>:<p>Program compiled successfully.</p>}
+          </div>}
+        </div>
         {hasContent && <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCopy} className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 rounded-md h-[34px] aspect-square text-amber-300 flex items-center text-xs px-2 gap-1'>{isCopied ? <CopyCheck size={15} /> : <CopyIcon size={15} />} {isCopied && "Copied"}</motion.button>}
       </div>
-      <div className='flex-1 border mt-3 rounded-lg border-amber-900 p-3'>
+      <div className='flex-1 border mt-3 rounded-lg border-amber-900 p-3 bg-[#24140c]'>
         {isRunning ? (
           <div className='h-full w-full grid place-items-center' >
             <div className='flex flex-col items-center'>
@@ -34,7 +40,12 @@ const OutputSection = () => {
               <p className='text-amber-300'>Your Code Is Running...</p>
             </div>
           </div>
-        ) : (hasContent ? (output || error) : (
+        ) : (error ? (
+          <pre className='whitespace-pre-wrap text-red-400/80'>{error}</pre>
+        ) : (output ? (
+          <pre className='whitespace-pre-wrap'>{output}</pre>
+        )
+          :
           <div className='h-full w-full grid place-items-center' >
             <div className='flex flex-col items-center text-amber-300'>
               <Clock />
