@@ -32,7 +32,7 @@ const OutputSection = () => {
         </div>
         {hasContent && <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCopy} className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 rounded-md h-[34px] aspect-square text-amber-300 flex items-center text-xs px-2 gap-1'>{isCopied ? <CopyCheck size={15} /> : <CopyIcon size={15} />} {isCopied && "Copied"}</motion.button>}
       </div>
-      <div className='flex-1 border mt-3 rounded-lg border-amber-900 p-3 bg-[#24140c]'>
+      <div className='flex-1 border mt-3 rounded-lg border-amber-900 p-3 bg-[#24140c] overflow-y-auto'>
         {isRunning ? (
           <div className='h-full w-full grid place-items-center' >
             <div className='flex flex-col items-center'>
