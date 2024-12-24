@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="flex gap-4 mt-5 h-[calc(100vh-150px)]">
+      <div className="flex flex-col gap-4 mt-5 h-[calc(100vh-150px)]">
         <EditorSection />
-        <OutputSection />
+        {/* <OutputSection /> */}
       </div>
     </div>
   );

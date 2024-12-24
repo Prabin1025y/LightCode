@@ -27,9 +27,9 @@ const Header = async () => {
                 <ThemeSelector />
                 <LanguageSelector hasAccess={convexUser?.isPro || false} />
                 {!convexUser?.isPro && <Link href="/pricing" className='border flex gap-1 items-center border-green-500 text-green-500 px-3 rounded-md bg-[#47db6031] hover:bg-[#319731b9] text-[Roboto] transition duration-200'><Sparkles size={14} />Pro</Link>}
-                <SignedIn>
+                {/* <SignedIn>
                     <RunButton />
-                </SignedIn>
+                </SignedIn> */}
                 <UserProfile />
             </div>
         </div >

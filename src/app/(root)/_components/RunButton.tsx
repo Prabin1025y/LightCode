@@ -26,7 +26,7 @@ const RunButton = () => {
         }
     }
     return (
-        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={isRunning} onClick={handleRunCode} className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200 text-sm font-[Roboto]'>{isRunning ? <Loader2 size={16} className='animate-spin' /> : <Play size={16} />}{isRunning ? "Running" : "RunCode"}</motion.button>
+        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={isRunning} onClick={handleRunCode} className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#437fda] transition duration-200 text-sm font-[Roboto]'>{isRunning ? <Loader2 size={16} className='animate-spin' /> : <Play size={16} />}{isRunning ? "Running" : "RunCode"}</motion.button>
     )
 }
 

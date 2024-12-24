@@ -7,6 +7,9 @@ import React, { useState } from 'react'
 import { Editor } from '@monaco-editor/react';
 import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants';
 import UseMounted from '@/app/hooks/useMounted';
+import RunButton from './RunButton';
+import { SignedIn } from '@clerk/nextjs';
+import OutputSection from './OutputSection';
 
 const EditorSection = () => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
@@ -45,14 +48,17 @@ const EditorSection = () => {
             <input onChange={(e) => handleFontSizeChange(parseInt(e.target.value))} value={fontSize} className='h-1' type="range" min={12} max={24} />
             {isMounted && <p className='text-sm'>{fontSize}</p>}
           </div>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleRefresh} className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 p-2 rounded-md h-[34px] aspect-square grid place-items-center text-amber-300'><RotateCcw size={15} /></motion.button>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSharePopupOpen(true)} className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Share size={16} />Share</motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleRefresh} title='Share this Snippet' className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 p-2 rounded-md h-[34px] aspect-square grid place-items-center text-amber-300'><Share size={15} /></motion.button>
+          <SignedIn>
+            <RunButton />
+          </SignedIn>
+          {/* <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSharePopupOpen(true)} className='border px-2 py-1 bg-[#2369ff] rounded-md border-[#3686ff] flex gap-1 items-center hover:bg-[#5f9fff] transition duration-200'><Share size={16} />Share</motion.button> */}
         </div>
       </div>
 
       <div className='flex-1 border mt-5 rounded-lg border-amber-900 bg-[#2c140e] overflow-hidden'>
         <Editor
-          height={"680px"}
+          height={"550px"}
           language={LANGUAGE_CONFIG[language].monacoLanguage}
           onChange={handleEditorChange}
           theme={theme}
@@ -81,6 +87,7 @@ const EditorSection = () => {
             }
           }}
         />
+        <OutputSection/>
       </div>
 
     </div>

@@ -21,7 +21,7 @@ const OutputSection = () => {
     setTimeout(() => setIsCopied(false), 4000);
   }
   return (
-    <div className='flex-1 flex flex-col bg-[#442617] rounded-xl p-5 font-[Roboto]'>
+    <div className='flex-1 flex flex-col bg-[#442617] rounded-b-xl p-5 font-[Roboto]'>
       <div className='flex justify-between'>
         <div className='flex gap-4'>
           <p className='text-sm text-amber-300 flex items-center gap-2'><SquareTerminal size={20} />Output</p>
@@ -30,7 +30,7 @@ const OutputSection = () => {
             {error?<p>Program crashed with some errors</p>:<p>Program compiled successfully.</p>}
           </div>}
         </div>
-        {hasContent && <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCopy} className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 rounded-md h-[34px] aspect-square text-amber-300 flex items-center text-xs px-2 gap-1'>{isCopied ? <CopyCheck size={15} /> : <CopyIcon size={15} />} {isCopied && "Copied"}</motion.button>}
+        {hasContent && <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCopy} title='Copy' className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 rounded-md h-[34px] aspect-square text-amber-300 flex items-center text-xs px-2 gap-1'>{isCopied ? <CopyCheck size={15} /> : <CopyIcon size={15} />} {isCopied && "Copied"}</motion.button>}
       </div>
       <div className='flex-1 border mt-3 rounded-lg border-amber-900 p-3 bg-[#24140c] overflow-y-auto'>
         {isRunning ? (
