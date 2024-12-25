@@ -15,7 +15,7 @@ const Header = async () => {
     const user = await currentUser();
 
     const convexUser = await convex.query(api.users.getUser, { userId: user?.id || "" });
-    console.log(convexUser);
+    // console.log(convexUser);
 
     return (
         <div className='w-full bg-[#2c180f] rounded-t-lg px-3 py-2 h-20 flex items-center justify-between'>

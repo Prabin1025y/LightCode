@@ -10,6 +10,7 @@ import UseMounted from '@/app/hooks/useMounted';
 import RunButton from './RunButton';
 import { SignedIn } from '@clerk/nextjs';
 import OutputSection from './OutputSection';
+import ShareSnippetPopup from './ShareSnippetPopup';
 
 const EditorSection = () => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
@@ -17,7 +18,6 @@ const EditorSection = () => {
   const { editor, fontSize, language, setFontSize, theme, setEditor } = useCodeEditorStore();
   const isMounted = UseMounted();
 
-  const handleRefresh = () => { }
   const handleEditorChange = (value: string | undefined) => {
     if (value) localStorage.setItem(`editor-code-${language}`, value);
   }
@@ -34,7 +34,7 @@ const EditorSection = () => {
       <div className='flex justify-between items-center'>
         <div className='flex gap-2'>
           <div className='grid place-items-center'>
-            <Image className='aspect-square object-cover' width={25} height={25} src={`/icons/${language}.png`} alt='language logo' />
+            <Image className='aspect-square object-cover w-auto h-auto' width={25} height={25} src={`/icons/${language}.png`} alt='language logo' />
           </div>
           <div>
             <p className='text-sm text-amber-200'>Code Editor</p>
@@ -48,7 +48,7 @@ const EditorSection = () => {
             <input onChange={(e) => handleFontSizeChange(parseInt(e.target.value))} value={fontSize} className='h-1' type="range" min={12} max={24} />
             {isMounted && <p className='text-sm'>{fontSize}</p>}
           </div>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleRefresh} title='Share this Snippet' className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 p-2 rounded-md h-[34px] aspect-square grid place-items-center text-amber-300'><Share size={15} /></motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSharePopupOpen(true)} title='Share this Snippet' className='border border-amber-900 bg-amber-800/40 hover:bg-amber-900 transition-colors duration-200 p-2 rounded-md h-[34px] aspect-square grid place-items-center text-amber-300'><Share size={15} /></motion.button>
           <SignedIn>
             <RunButton />
           </SignedIn>
@@ -87,9 +87,9 @@ const EditorSection = () => {
             }
           }}
         />
-        <OutputSection/>
+        <OutputSection />
       </div>
-
+      {isSharePopupOpen && <ShareSnippetPopup onClose={() => setIsSharePopupOpen(false)} />}
     </div>
   )
 }
