@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { CodeXml, Sparkles } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
-import UserProfile from './UserProfile';
 import { SignedIn } from '@clerk/nextjs';
 import RunButton from './RunButton';
+import UserProfile from './UserProfile';
 
 const Header = async () => {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
