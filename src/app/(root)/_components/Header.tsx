@@ -6,8 +6,6 @@ import Link from 'next/link';
 import { CodeXml, Sparkles } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
-import { SignedIn } from '@clerk/nextjs';
-import RunButton from './RunButton';
 import UserProfile from './UserProfile';
 
 const Header = async () => {

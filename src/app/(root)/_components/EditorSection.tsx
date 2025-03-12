@@ -1,6 +1,6 @@
 'use client';
 import { useCodeEditorStore } from '@/Store/UseCodeEditorStore'
-import { RotateCcw, Share, Type, TypeOutline } from 'lucide-react';
+import { Share, TypeOutline } from 'lucide-react';
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -9,13 +9,12 @@ import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants';
 import UseMounted from '@/app/hooks/useMounted';
 import RunButton from './RunButton';
 import { SignedIn } from '@clerk/nextjs';
-import OutputSection from './OutputSection';
 import ShareSnippetPopup from './ShareSnippetPopup';
 
 const EditorSection = () => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
 
-  const { editor, fontSize, language, setFontSize, theme, setEditor } = useCodeEditorStore();
+  const { fontSize, language, setFontSize, theme, setEditor } = useCodeEditorStore();
   const isMounted = UseMounted();
 
   const handleEditorChange = (value: string | undefined) => {
@@ -87,7 +86,7 @@ const EditorSection = () => {
             }
           }}
         />
-        <OutputSection />
+        {/* <OutputSection /> */}
       </div>
       {isSharePopupOpen && <ShareSnippetPopup onClose={() => setIsSharePopupOpen(false)} />}
     </div>

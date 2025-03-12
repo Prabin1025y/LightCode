@@ -1,11 +1,13 @@
 'use client';
-import { CheckCircleIcon, CheckSquare2Icon, Clock, CopyCheck, CopyIcon, SquareTerminal, TriangleAlertIcon } from 'lucide-react'
+import { CheckCircleIcon,  Clock, CopyCheck, CopyIcon, SquareTerminal, TriangleAlertIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useCodeEditorStore } from '@/Store/UseCodeEditorStore'
 import Image from 'next/image';
+import { useUser } from '@clerk/nextjs';
 
 const OutputSection = () => {
+  const { user } = useUser();
   const [isCopied, setIsCopied] = useState(false);
 
   const { output, error, isRunning } = useCodeEditorStore();
@@ -49,7 +51,7 @@ const OutputSection = () => {
           <div className='h-full w-full grid place-items-center' >
             <div className='flex flex-col items-center text-amber-300'>
               <Clock />
-              <p>Run your code to see output here</p>
+              {user? <p>Run your code to see output here</p> : <p>Log in to Run Your code</p>}
             </div>
           </div>
         ))}

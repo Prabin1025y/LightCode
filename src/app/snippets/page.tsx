@@ -8,8 +8,8 @@ import Header from './_components/Header';
 const SnippetPage = () => {
   const snippets = useQuery(api.snippets.getSnippet);
   const [searchString, setSearchString] = useState("");
-  const [filteredLanguage, setFilteredLanguage] = useState<string | null>(null)
-  const [view, setView] = useState<"grid" | "list">("grid")
+  // const [filteredLanguage, setFilteredLanguage] = useState<string | null>(null)
+  // const [view, setView] = useState<"grid" | "list">("grid")
 
   if (snippets === undefined)
     return <div>Loading</div>
@@ -17,15 +17,15 @@ const SnippetPage = () => {
   const languages = [...new Set(snippets.map(s => s.language))];
   const popularLanguages = languages.slice(0, 5);
 
-  const filteredSnippets = snippets.filter(snippet => {
-    const matchesSearch = snippet.language.includes(searchString) ||
-      snippet.title.includes(searchString) ||
-      snippet.userId.includes(searchString);
+  // const filteredSnippets = snippets.filter(snippet => {
+  //   const matchesSearch = snippet.language.includes(searchString) ||
+  //     snippet.title.includes(searchString) ||
+  //     snippet.userId.includes(searchString);
 
-    const matchesLanguage = !filteredLanguage || snippet.language === filteredLanguage;
+  //   const matchesLanguage = !filteredLanguage || snippet.language === filteredLanguage;
 
-    return matchesSearch && matchesLanguage
-  })
+  //   return matchesSearch && matchesLanguage
+  // })
 
   return (
     <>

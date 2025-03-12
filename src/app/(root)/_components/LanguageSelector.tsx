@@ -1,19 +1,19 @@
 'use client';
 import { useCodeEditorStore } from '@/Store/UseCodeEditorStore';
 import React, { useEffect, useRef, useState } from 'react'
-import { LANGUAGE_CONFIG, THEMES } from '../_constants';
-import { ChevronDown, ChevronDownIcon, Cloud, Github, LanguagesIcon, Laptop, LockIcon, Moon, Palette, Sparkle, Sparkles, Sun } from 'lucide-react';
+import { LANGUAGE_CONFIG } from '../_constants';
+import { ChevronDown, LockIcon,  Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import UseMounted from '@/app/hooks/useMounted';
 import Image from 'next/image';
 
-const THEME_ICONS: Record<string, React.ReactNode> = {
-  "vs-dark": <Moon size={16} />,
-  "vs-light": <Sun size={16} />,
-  "github-dark": <Github size={16} />,
-  "monokai": <Laptop size={16} />,
-  "solarized-dark": <Cloud size={16} />
-}
+// const THEME_ICONS: Record<string, React.ReactNode> = {
+//   "vs-dark": <Moon size={16} />,
+//   "vs-light": <Sun size={16} />,
+//   "github-dark": <Github size={16} />,
+//   "monokai": <Laptop size={16} />,
+//   "solarized-dark": <Cloud size={16} />
+// }
 
 const LanguageSelector = ({ hasAccess }: { hasAccess: boolean }) => {
   const isMounted = UseMounted();

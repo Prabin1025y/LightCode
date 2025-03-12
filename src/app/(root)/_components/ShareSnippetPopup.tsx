@@ -20,9 +20,9 @@ const ShareSnippetPopup = ({ onClose }: { onClose: () => void }) => {
       await saveSnippet({ language, code, title });
       onClose();
       toast.success("Snippet shared.");
-    } catch (error: any) {
+    } catch (error) {
       console.log("error in sharesnippetpopup", error);
-      toast.error(error);
+      toast.error(String(error));
     } finally {
       setIsLoading(false);
     }

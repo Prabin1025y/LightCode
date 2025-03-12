@@ -1,5 +1,5 @@
 'use client';
-import { Loader, Loader2, Play } from 'lucide-react'
+import {  Loader2, Play } from 'lucide-react'
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useCodeEditorStore } from '@/Store/UseCodeEditorStore';
